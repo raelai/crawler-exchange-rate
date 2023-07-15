@@ -1,5 +1,5 @@
-#pip install selenium
-#pip install pandas
+# pip install selenium
+# pip install pandas
 from bs4 import BeautifulSoup
 import pandas as pd
 import csv
@@ -20,7 +20,7 @@ def getData(outputfile):
   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
   driver.get("https://portal.sw.nat.gov.tw/APGQO/GC331#")
 
-  #use beautfiulsoup-find function to locate css selector and get the data
+  # use beautfiulsoup-find function to locate css selector and get the data
   query = driver.find_element("id", "queryButton")
   query.click()
   bs = BeautifulSoup(driver.page_source,'html.parser')
@@ -31,7 +31,7 @@ def getData(outputfile):
     writer.writerow(["country", "currency", "currency_code", "year", "month", "period", "purchase_in"\
                       ,"sales_out"])
     for row_num in range(1, 29):
-      #row_num = 1
+      # row_num = 1
       country = bs.find("tr", id = row_num).find_all("td")[1].string.strip()
       currency = bs.find("tr", id = row_num).find_all("td")[2].string.strip()
       currency_code = bs.find("tr", id = row_num).find_all("td")[3].string.strip()
@@ -41,19 +41,19 @@ def getData(outputfile):
       purchase_in = bs.find("tr", id = row_num).find_all("td")[7].string.strip()
       sales_out = bs.find("tr", id = row_num).find_all("td")[8].string.strip()
 
-      #write into csv
+      # write into csv
       writer.writerow([country, currency, currency_code, year, month, period, purchase_in, sales_out])
-      #read_file = pd.read_csv(output_file_name)
-      #read_file.to_excel ('/content/drive/MyDrive/output.xlsx', index = None, header=True)
+      # read_file = pd.read_csv(output_file_name)
+      # read_file.to_excel ('/content/drive/MyDrive/output.xlsx', index = None, header=True)
 
 if __name__ == '__main__':
-  #configurable parameter 
-  #link:https://portal.sw.nat.gov.tw/APGQO/GC331#
+  # configurable parameter 
+  # link:https://portal.sw.nat.gov.tw/APGQO/GC331#
 
-  output_file_name = './output.csv' #set location and file name
+  output_file_name = './output.csv' # set location and file name
 
-  # 
-  getData(output_file_name) #csv output
+  
+  getData(output_file_name) # csv output
   read_file = pd.read_csv (output_file_name)
   read_file.to_excel ('./output.xlsx', index = None, header=True) #excel output
   print("\nfinish")
