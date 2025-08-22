@@ -1,3 +1,4 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a//dev/null b/README.md
 index 0000000000000000000000000000000000000000..52478eab2b5f2b0359c7eb8b591acf19e3122ff7 100644
 --- a//dev/null
@@ -35,3 +36,6 @@ index 0000000000000000000000000000000000000000..52478eab2b5f2b0359c7eb8b591acf19
 +
 +- Network access is required to download the exchange rate page.
 +- The script automatically closes the browser after scraping the data.
+ 
+EOF
+)
